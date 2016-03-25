@@ -1,0 +1,123 @@
+package zivlonyt.treasuremod.init;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import zivlonyt.treasuremod.Reference;
+
+public class TreasureItems {
+
+	public static Item zivlon_gem;
+	public static Item zivlon_helmet;
+	public static Item zivlon_chestplate;
+	public static Item zivlon_leggings;
+	public static Item zivlon_boots;
+	
+	public static ArmorMaterial ZARMOR = EnumHelper.addArmorMaterial("ZARMOR", "tt:zarmor", 5000, new int[] {20, 30, 25, 15}, 30);
+
+	
+	public static ToolMaterial ZSWORD = EnumHelper.addToolMaterial("ZSWORD", 3, 3000, 8.0F, 6.0F, 10);
+	public static ToolMaterial ZPICK = EnumHelper.addToolMaterial("ZPICK", 2, 3000, 400F, 6.0F, 10);
+	public static ToolMaterial ZSHOVEL = EnumHelper.addToolMaterial("ZSHOVEL", 3, 3000, 80F, 6.0F, 10);
+	public static ToolMaterial ZAXE = EnumHelper.addToolMaterial("ZAXE", 3, 3000, 80F, 6.0F, 10);
+	public static ToolMaterial ZHOE = EnumHelper.addToolMaterial("ZHOE", 3, 3000, 50F, 6.0F, 10);
+
+	public static void init() {
+		zivlon_gem = new Item().setUnlocalizedName("zivlon_gem");
+		zivlon_sword = new Item().setUnlocalizedName("zivlon_sword");
+		zivlon_pickaxe = new Item().setUnlocalizedName("zivlon_pickaxe");
+		zivlon_shovel = new Item().setUnlocalizedName("zivlon_shovel");
+		zivlon_axe = new Item().setUnlocalizedName("zivlon_axe");
+		zivlon_hoe = new Item().setUnlocalizedName("zivlon_hoe");
+		zivlon_helmet = new Item().setUnlocalizedName("zivlon_helmet");
+		//Chest Spawning
+		ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(zivlon_gem),3,5,20));
+		ChestGenHooks.getInfo(ChestGenHooks.NETHER_FORTRESS).addItem(new WeightedRandomChestContent(new ItemStack(zivlon_gem),3,5,20));
+		ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(zivlon_gem),3,5,20));
+		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(zivlon_gem),3,5,20));
+		ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(new ItemStack(zivlon_gem),3,5,20));
+
+
+		
+		
+	}
+	
+	public static void register()
+	{
+		//Zivlon Names
+		GameRegistry.registerItem(zivlon_gem, zivlon_gem.getUnlocalizedName().substring(5));
+		//Zivlon Tools
+		GameRegistry.registerItem(zivlon_sword = new ZivlonSword(zivlon_sword.getUnlocalizedName().substring(5), ZSWORD), "zivlon_sword");
+		GameRegistry.registerItem(zivlon_pickaxe = new ZivlonPickaxe(zivlon_pickaxe.getUnlocalizedName().substring(5), ZPICK), "zivlon_pickaxe");
+		GameRegistry.registerItem(zivlon_shovel = new ZivlonShovel(zivlon_shovel.getUnlocalizedName().substring(5), ZSHOVEL), "zivlon_shovel");
+		GameRegistry.registerItem(zivlon_axe = new ZivlonAxe(zivlon_axe.getUnlocalizedName().substring(5), ZAXE), "zivlon_axe");
+		GameRegistry.registerItem(zivlon_hoe = new ZivlonHoe(zivlon_hoe.getUnlocalizedName().substring(5), ZHOE), "zivlon_hoe");
+		//Zivlon Armor
+		GameRegistry.registerItem(zivlon_helmet = new ItemZivlonArmor("zivlon_helmet", ZARMOR, 1, 0), "zivlon_helmet");
+		GameRegistry.registerItem(zivlon_chestplate = new ItemZivlonArmor("zivlon_chestplate", ZARMOR, 1, 1), "zivlon_chestplate");
+		GameRegistry.registerItem(zivlon_leggings = new ItemZivlonArmor("zivlon_leggings", ZARMOR, 2, 2), "zivlon_leggings");
+		GameRegistry.registerItem(zivlon_boots = new ItemZivlonArmor("zivlon_boots", ZARMOR, 1, 3), "zivlon_boots");       
+		//Zivlon Sword Crafting
+		GameRegistry.addRecipe(new ItemStack(zivlon_sword), new Object[]{" Z ", " Z "," S ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		GameRegistry.addRecipe(new ItemStack(zivlon_sword), new Object[]{"Z  ", "Z  ","S  ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		GameRegistry.addRecipe(new ItemStack(zivlon_sword), new Object[]{"  Z", "  Z","  S",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		//Zivlon Pick Crafting
+		GameRegistry.addRecipe(new ItemStack(zivlon_pickaxe), new Object[]{"ZZZ", " S "," S ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		//Zivlon Shovel Crafting
+		GameRegistry.addRecipe(new ItemStack(zivlon_shovel), new Object[]{" Z ", " S "," S ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		GameRegistry.addRecipe(new ItemStack(zivlon_shovel), new Object[]{"Z  ", "S  ","S  ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		GameRegistry.addRecipe(new ItemStack(zivlon_shovel), new Object[]{"  Z", "  S","  S",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		//Zivlon Axe Crafting
+		GameRegistry.addRecipe(new ItemStack(zivlon_axe), new Object[]{" ZZ", " SZ"," S ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		GameRegistry.addRecipe(new ItemStack(zivlon_axe), new Object[]{"ZZ ", "ZS "," S ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		//Zivlon Hoe Crafting
+		GameRegistry.addRecipe(new ItemStack(zivlon_hoe), new Object[]{"ZZ ", " S "," S ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		GameRegistry.addRecipe(new ItemStack(zivlon_hoe), new Object[]{" ZZ", " S "," S ",'S', Items.stick, 'Z', TreasureItems.zivlon_gem});
+		
+
+
+	}
+
+	public static void registerRenders()
+	{
+		registerRender(zivlon_gem);
+		//Zivlon Tools
+		registerRender(zivlon_sword);
+		registerRender(zivlon_pickaxe);
+		registerRender(zivlon_shovel);
+		registerRender(zivlon_axe);
+		registerRender(zivlon_hoe);
+		registerRender(zivlon_helmet);
+		registerRender(zivlon_chestplate);
+		registerRender(zivlon_leggings);
+		registerRender(zivlon_boots);
+	}
+	
+	public static void registerRender(Item item)
+	{
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Reference.MOD_ID + ":" + item.getUnlocalizedName().substring(5), "inventory"));		
+	}
+	
+	//Zivlon Tools
+	public static Item zivlon_sword;
+	public static Item zivlon_axe;
+	public static Item zivlon_shovel;
+	public static Item zivlon_pickaxe;
+	public static Item zivlon_hoe;
+	
+	{
+		
+	}
+	
+	
+	
+}
+
